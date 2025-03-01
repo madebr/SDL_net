@@ -218,6 +218,7 @@ if(SDLNET_INSTALL)
     endif()
 
     configure_package_config_file(cmake/SDL3_netConfig.cmake.in SDL3_netConfig.cmake
+        NO_SET_AND_CHECK_MACRO
         INSTALL_DESTINATION "${SDLNET_INSTALL_CMAKEDIR}"
     )
     write_basic_package_version_file("${PROJECT_BINARY_DIR}/SDL3_netConfigVersion.cmake"
@@ -236,6 +237,9 @@ if(SDLNET_INSTALL)
         DESTINATION "${SDLNET_INSTALL_CMAKEDIR}"
         COMPONENT devel
     )
+
+    export(TARGETS ${sdl3_net_target_name} NAMESPACE "SDL3_net::" FILE "${sdl3_net_target_name}-targets.cmake")
+
 
     if(SDLNET_RELOCATABLE)
         file(RELATIVE_PATH SDL_PATH_PREFIX_RELATIVE_TO_PKGCONFIG "${CMAKE_INSTALL_PREFIX}/${SDLNET_PKGCONFIG_INSTALLDIR}" "${CMAKE_INSTALL_PREFIX}")
